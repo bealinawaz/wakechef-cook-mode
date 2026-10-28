@@ -1,4 +1,4 @@
-=== Recipe Cook Mode ===
+=== WakeChef Cook Mode ===
 Contributors: imalinawaz
 Donate link: https://www.buymeacoffee.com/bealinawaz
 Tags: cook mode, recipe, wp recipe maker, keep screen awake, wake lock
@@ -13,14 +13,14 @@ Add a Cook Mode toggle that keeps your readers' screens awake while they follow 
 
 == Description ==
 
-Nothing is more frustrating than a phone screen going dark with flour on your hands. Recipe Cook Mode adds a simple toggle to your recipes. When a reader switches it on, their screen stays awake until they switch it off or leave the page.
+Nothing is more frustrating than a phone screen going dark with flour on your hands. WakeChef Cook Mode adds a simple toggle to your recipes. When a reader switches it on, their screen stays awake until they switch it off or leave the page.
 
 **Add it wherever your recipes are**
 
 * **WP Recipe Maker:** one checkbox adds the toggle to every recipe card, at the top or bottom. No template editing needed.
 * **Any post type or category:** automatically add the toggle to posts, pages, or custom post types, optionally limited to recipe categories. Works with recipes from any plugin, or recipes written straight into the post.
 * **Block:** insert the Cook Mode block anywhere in the block editor.
-* **Shortcode:** use `[recipe_cook_mode]` in classic content, widgets, or page builders.
+* **Shortcode:** use `[wakechef_cook_mode]` in classic content, widgets, or page builders.
 
 **Built for real kitchens**
 
@@ -33,14 +33,14 @@ Nothing is more frustrating than a phone screen going dark with flour on your ha
 
 **Customize it**
 
-Change the label, description, and accent color under Settings → Recipe Cook Mode. The block and shortcode can override the text for individual recipes.
+Change the label, description, and accent color under Settings → WakeChef Cook Mode. The block and shortcode can override the text for individual recipes.
 
 == Installation ==
 
 1. Install and activate the plugin.
-2. Go to **Settings → Recipe Cook Mode**.
+2. Go to **Settings → WakeChef Cook Mode**.
 3. If you use WP Recipe Maker, the toggle is already added to your recipe cards. Choose the position you prefer.
-4. For other recipes, choose the post types (and optionally categories) under **Automatic placement**, or add the Cook Mode block or the `[recipe_cook_mode]` shortcode where you want it.
+4. For other recipes, choose the post types (and optionally categories) under **Automatic placement**, or add the Cook Mode block or the `[wakechef_cook_mode]` shortcode where you want it.
 
 == Frequently Asked Questions ==
 
@@ -58,7 +58,7 @@ Browsers release the wake lock when the page is hidden, for example when switchi
 
 = Can I change the text for one recipe? =
 
-Yes. The block has label and description settings in the sidebar, and the shortcode accepts attributes: `[recipe_cook_mode label="Keep screen on" description="Handy while kneading"]`.
+Yes. The block has label and description settings in the sidebar, and the shortcode accepts attributes: `[wakechef_cook_mode label="Keep screen on" description="Handy while kneading"]`.
 
 = Will a post show two toggles? =
 

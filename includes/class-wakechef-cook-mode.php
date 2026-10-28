@@ -2,7 +2,7 @@
 /**
  * Front-end toggle, integrations, shortcode, and block.
  *
- * @package Recipe_Cook_Mode
+ * @package WakeChef_Cook_Mode
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -10,11 +10,11 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Renders the Cook Mode toggle and decides where it appears.
  */
-final class Recipe_Cook_Mode {
+final class WakeChef_Cook_Mode {
 
-	const HANDLE    = 'recipe-cook-mode';
-	const SHORTCODE = 'recipe_cook_mode';
-	const BLOCK     = 'recipe-cook-mode/toggle';
+	const HANDLE    = 'wakechef-cook-mode';
+	const SHORTCODE = 'wakechef_cook_mode';
+	const BLOCK     = 'wakechef-cook-mode/toggle';
 
 	/**
 	 * Number of toggles rendered on this page, used for unique element IDs.
@@ -37,12 +37,12 @@ final class Recipe_Cook_Mode {
 	 * Registers assets, the shortcode, and the block.
 	 */
 	public static function register() {
-		wp_register_style( self::HANDLE, RECIPE_COOK_MODE_URL . 'assets/cook-mode.css', array(), RECIPE_COOK_MODE_VERSION );
+		wp_register_style( self::HANDLE, WAKECHEF_COOK_MODE_URL . 'assets/cook-mode.css', array(), WAKECHEF_COOK_MODE_VERSION );
 		wp_register_script(
 			self::HANDLE,
-			RECIPE_COOK_MODE_URL . 'assets/cook-mode.js',
+			WAKECHEF_COOK_MODE_URL . 'assets/cook-mode.js',
 			array(),
-			RECIPE_COOK_MODE_VERSION,
+			WAKECHEF_COOK_MODE_VERSION,
 			array(
 				'in_footer' => true,
 				'strategy'  => 'defer',
@@ -50,33 +50,33 @@ final class Recipe_Cook_Mode {
 		);
 		wp_localize_script(
 			self::HANDLE,
-			'recipeCookMode',
+			'wakechefCookMode',
 			array(
-				'active'      => __( 'Cook Mode is on. Your screen will stay awake.', 'recipe-cook-mode' ),
-				'paused'      => __( 'Cook Mode is paused. It will resume when you return to this page.', 'recipe-cook-mode' ),
-				'unsupported' => __( 'Cook Mode is not supported in this browser.', 'recipe-cook-mode' ),
-				'failed'      => __( 'Cook Mode could not be turned on. Check your battery saver settings and try again.', 'recipe-cook-mode' ),
+				'active'      => __( 'Cook Mode is on. Your screen will stay awake.', 'wakechef-cook-mode' ),
+				'paused'      => __( 'Cook Mode is paused. It will resume when you return to this page.', 'wakechef-cook-mode' ),
+				'unsupported' => __( 'Cook Mode is not supported in this browser.', 'wakechef-cook-mode' ),
+				'failed'      => __( 'Cook Mode could not be turned on. Check your battery saver settings and try again.', 'wakechef-cook-mode' ),
 			)
 		);
 
 		add_shortcode( self::SHORTCODE, array( __CLASS__, 'shortcode' ) );
 
 		wp_register_script(
-			'recipe-cook-mode-block',
-			RECIPE_COOK_MODE_URL . 'assets/block.js',
+			'wakechef-cook-mode-block',
+			WAKECHEF_COOK_MODE_URL . 'assets/block.js',
 			array( 'wp-blocks', 'wp-element', 'wp-block-editor', 'wp-components', 'wp-server-side-render', 'wp-i18n' ),
-			RECIPE_COOK_MODE_VERSION,
+			WAKECHEF_COOK_MODE_VERSION,
 			true
 		);
 		register_block_type(
 			self::BLOCK,
 			array(
 				'api_version'     => 3,
-				'title'           => __( 'Cook Mode', 'recipe-cook-mode' ),
+				'title'           => __( 'Cook Mode', 'wakechef-cook-mode' ),
 				'category'        => 'widgets',
 				'icon'            => 'visibility',
-				'description'     => __( 'A toggle that keeps the screen awake while visitors follow a recipe.', 'recipe-cook-mode' ),
-				'editor_script'   => 'recipe-cook-mode-block',
+				'description'     => __( 'A toggle that keeps the screen awake while visitors follow a recipe.', 'wakechef-cook-mode' ),
+				'editor_script'   => 'wakechef-cook-mode-block',
 				'style'           => self::HANDLE,
 				'attributes'      => array(
 					'label'       => array(
@@ -137,7 +137,7 @@ final class Recipe_Cook_Mode {
 			return $output;
 		}
 		$toggle = self::render();
-		return 'bottom' === Recipe_Cook_Mode_Settings::get()['wprm_position'] ? $output . $toggle : $toggle . $output;
+		return 'bottom' === WakeChef_Cook_Mode_Settings::get()['wprm_position'] ? $output . $toggle : $toggle . $output;
 	}
 
 	/**
@@ -162,11 +162,11 @@ final class Recipe_Cook_Mode {
 			return $content;
 		}
 		$toggle = self::render();
-		return 'bottom' === Recipe_Cook_Mode_Settings::get()['auto_position'] ? $content . $toggle : $toggle . $content;
+		return 'bottom' === WakeChef_Cook_Mode_Settings::get()['auto_position'] ? $content . $toggle : $toggle . $content;
 	}
 
 	/**
-	 * Shortcode handler: [recipe_cook_mode label="..." description="..."].
+	 * Shortcode handler: [wakechef_cook_mode label="..." description="..."].
 	 *
 	 * @param array|string $atts Shortcode attributes.
 	 * @return string
@@ -204,25 +204,25 @@ final class Recipe_Cook_Mode {
 	 * @return string
 	 */
 	public static function render( $label = '', $description = '' ) {
-		$settings    = Recipe_Cook_Mode_Settings::get();
+		$settings    = WakeChef_Cook_Mode_Settings::get();
 		$label       = '' !== trim( $label ) ? $label : $settings['label'];
 		$description = '' !== trim( $description ) ? $description : $settings['description'];
-		$id          = 'recipe-cook-mode-' . ( ++self::$count );
+		$id          = 'wakechef-cook-mode-' . ( ++self::$count );
 
 		self::enqueue();
 
 		ob_start();
 		?>
-		<div class="recipe-cook-mode" style="<?php echo esc_attr( '--recipe-cook-mode-color: ' . $settings['color'] ); ?>">
-			<label class="recipe-cook-mode__toggle" for="<?php echo esc_attr( $id ); ?>">
-				<input type="checkbox" role="switch" class="recipe-cook-mode__input" id="<?php echo esc_attr( $id ); ?>"<?php echo '' !== trim( $description ) ? ' aria-describedby="' . esc_attr( $id . '-description' ) . '"' : ''; ?> />
-				<span class="recipe-cook-mode__switch" aria-hidden="true"></span>
-				<span class="recipe-cook-mode__label"><?php echo esc_html( $label ); ?></span>
+		<div class="wakechef-cook-mode" style="<?php echo esc_attr( '--wakechef-cook-mode-color: ' . $settings['color'] ); ?>">
+			<label class="wakechef-cook-mode__toggle" for="<?php echo esc_attr( $id ); ?>">
+				<input type="checkbox" role="switch" class="wakechef-cook-mode__input" id="<?php echo esc_attr( $id ); ?>"<?php echo '' !== trim( $description ) ? ' aria-describedby="' . esc_attr( $id . '-description' ) . '"' : ''; ?> />
+				<span class="wakechef-cook-mode__switch" aria-hidden="true"></span>
+				<span class="wakechef-cook-mode__label"><?php echo esc_html( $label ); ?></span>
 			</label>
 			<?php if ( '' !== trim( $description ) ) : ?>
-				<p class="recipe-cook-mode__description" id="<?php echo esc_attr( $id . '-description' ); ?>"><?php echo esc_html( $description ); ?></p>
+				<p class="wakechef-cook-mode__description" id="<?php echo esc_attr( $id . '-description' ); ?>"><?php echo esc_html( $description ); ?></p>
 			<?php endif; ?>
-			<p class="recipe-cook-mode__status" role="status" aria-live="polite"></p>
+			<p class="wakechef-cook-mode__status" role="status" aria-live="polite"></p>
 		</div>
 		<?php
 		return (string) ob_get_clean();
@@ -234,7 +234,7 @@ final class Recipe_Cook_Mode {
 	 * @return bool
 	 */
 	private static function wprm_applies() {
-		return Recipe_Cook_Mode_Settings::wprm_active() && Recipe_Cook_Mode_Settings::get()['wprm_enabled'];
+		return WakeChef_Cook_Mode_Settings::wprm_active() && WakeChef_Cook_Mode_Settings::get()['wprm_enabled'];
 	}
 
 	/**
@@ -254,7 +254,7 @@ final class Recipe_Cook_Mode {
 	 * @return bool
 	 */
 	private static function auto_insert_applies( $post ) {
-		$settings = Recipe_Cook_Mode_Settings::get();
+		$settings = WakeChef_Cook_Mode_Settings::get();
 		if ( ! in_array( $post->post_type, $settings['auto_post_types'], true ) ) {
 			return false;
 		}

@@ -2,7 +2,7 @@
 /**
  * Plugin settings.
  *
- * @package Recipe_Cook_Mode
+ * @package WakeChef_Cook_Mode
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -10,9 +10,9 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Reads and validates the plugin settings.
  */
-final class Recipe_Cook_Mode_Settings {
+final class WakeChef_Cook_Mode_Settings {
 
-	const OPTION    = 'recipe_cook_mode_settings';
+	const OPTION    = 'wakechef_cook_mode_settings';
 	const POSITIONS = array( 'top', 'bottom' );
 
 	/**
@@ -22,8 +22,8 @@ final class Recipe_Cook_Mode_Settings {
 	 */
 	public static function defaults() {
 		return array(
-			'label'           => __( 'Cook Mode', 'recipe-cook-mode' ),
-			'description'     => __( 'Keep your screen awake while you cook', 'recipe-cook-mode' ),
+			'label'           => __( 'Cook Mode', 'wakechef-cook-mode' ),
+			'description'     => __( 'Keep your screen awake while you cook', 'wakechef-cook-mode' ),
 			'color'           => '#2271b1',
 			'wprm_enabled'    => true,
 			'wprm_position'   => 'top',

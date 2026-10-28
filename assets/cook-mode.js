@@ -1,24 +1,24 @@
 /**
- * Recipe Cook Mode: keeps the screen awake while any Cook Mode toggle is on.
+ * WakeChef Cook Mode: keeps the screen awake while any Cook Mode toggle is on.
  * All toggles on a page share one wake lock and stay in sync.
  */
 ( function () {
 	'use strict';
 
-	var strings = window.recipeCookMode || {};
+	var strings = window.wakechefCookMode || {};
 	var wakeLock = null;
 	var wanted = false;
 
 	function toggles() {
-		return Array.prototype.slice.call( document.querySelectorAll( '.recipe-cook-mode' ) );
+		return Array.prototype.slice.call( document.querySelectorAll( '.wakechef-cook-mode' ) );
 	}
 
 	function render( message, state ) {
 		toggles().forEach( function ( toggle ) {
-			toggle.querySelector( '.recipe-cook-mode__input' ).checked = wanted;
+			toggle.querySelector( '.wakechef-cook-mode__input' ).checked = wanted;
 			toggle.classList.toggle( 'is-active', 'active' === state );
 			toggle.classList.toggle( 'is-error', 'error' === state );
-			toggle.querySelector( '.recipe-cook-mode__status' ).textContent = message || '';
+			toggle.querySelector( '.wakechef-cook-mode__status' ).textContent = message || '';
 		} );
 	}
 
@@ -62,15 +62,15 @@
 
 		if ( ! ( 'wakeLock' in navigator ) ) {
 			all.forEach( function ( toggle ) {
-				toggle.querySelector( '.recipe-cook-mode__input' ).disabled = true;
+				toggle.querySelector( '.wakechef-cook-mode__input' ).disabled = true;
 				toggle.classList.add( 'is-unsupported' );
-				toggle.querySelector( '.recipe-cook-mode__status' ).textContent = strings.unsupported || '';
+				toggle.querySelector( '.wakechef-cook-mode__status' ).textContent = strings.unsupported || '';
 			} );
 			return;
 		}
 
 		all.forEach( function ( toggle ) {
-			toggle.querySelector( '.recipe-cook-mode__input' ).addEventListener( 'change', function ( event ) {
+			toggle.querySelector( '.wakechef-cook-mode__input' ).addEventListener( 'change', function ( event ) {
 				if ( event.target.checked ) {
 					enable();
 				} else {
