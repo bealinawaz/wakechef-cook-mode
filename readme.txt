@@ -5,7 +5,7 @@ Tags: cook mode, keep screen awake, recipe, cooking, food blog
 Requires at least: 6.2
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -95,6 +95,10 @@ No. The Cook view reads the recipe already on the page. The reader's checked ing
 
 No. If a post contains a WP Recipe Maker card, a Cook Mode block, or the shortcode, automatic placement skips that post.
 
+= Is the plugin available in my language? =
+
+The plugin is ready for translation, and translations are made by volunteers on WordPress.org. You can help translate it into your language at [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/wakechef-cook-mode/). Once a language is 90% translated, WordPress installs the translation automatically through language packs. A translation template, languages/wakechef-cook-mode.pot, is included for tools such as Poedit and Loco Translate.
+
 == Screenshots ==
 
 1. The Cook Mode toggle placed automatically at the top of a recipe post.
@@ -104,6 +108,12 @@ No. If a post contains a WP Recipe Maker card, a Cook Mode block, or the shortco
 5. The Cook view on a phone: one step at a time in large text, with tabs for ingredients and steps.
 
 == Changelog ==
+
+= 1.1.1 (2026-11-15) =
+* Fixed: the Cook Mode block's labels in the block editor can now be translated (the block's JavaScript translations are loaded from WordPress.org language packs).
+* Right-to-left languages: the toggle, the Start cooking arrow and the Cook view layout follow the page direction, and swiping and arrow keys move the right way in Arabic, Hebrew, Urdu and other RTL languages.
+* Translations: a translation template (languages/wakechef-cook-mode.pot) is included.
+* Translations: the toggle label, description, and Start cooking button text that are left at their default are no longer saved in the language the settings were saved in, so readers see them in their own language. Customized texts are kept.
 
 = 1.1.0 (2026-11-15) =
 * New: Cook view. A Start cooking button opens the recipe full screen with ingredient checkboxes and one step at a time, keeping the screen awake.
@@ -115,6 +125,9 @@ No. If a post contains a WP Recipe Maker card, a Cook Mode block, or the shortco
 * Initial release.
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+Translation and right-to-left language improvements. Nothing to change.
 
 = 1.1.0 =
 Adds a free step-by-step Cook view that works with any recipe card plugin. It appears automatically on pages with recipe data; turn it off under Settings if you prefer.

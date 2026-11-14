@@ -85,6 +85,8 @@ final class WakeChef_Cook_Mode {
 			WAKECHEF_COOK_MODE_VERSION,
 			true
 		);
+		// Loads the block's JavaScript translations from WordPress.org language packs.
+		wp_set_script_translations( 'wakechef-cook-mode-block', 'wakechef-cook-mode' );
 		register_block_type(
 			self::BLOCK,
 			array(

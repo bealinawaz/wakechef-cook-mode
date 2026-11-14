@@ -4,7 +4,7 @@
 	box-sizing: border-box;
 	margin: 1em 0;
 	padding: 0.75em 1em;
-	border-left: 4px solid var(--wakechef-cook-mode-color);
+	border-inline-start: 4px solid var(--wakechef-cook-mode-color);
 	background: rgba(0, 0, 0, 0.03);
 	border-radius: 4px;
 	font-family: inherit;
@@ -40,7 +40,7 @@
 	content: "";
 	position: absolute;
 	top: 0.1875em;
-	left: 0.1875em;
+	inset-inline-start: 0.1875em;
 	width: 1.125em;
 	height: 1.125em;
 	border-radius: 50%;
@@ -54,6 +54,10 @@
 
 .wakechef-cook-mode__input:checked + .wakechef-cook-mode__switch::after {
 	transform: translateX(1.25em);
+}
+
+[dir="rtl"] .wakechef-cook-mode__input:checked + .wakechef-cook-mode__switch::after {
+	transform: translateX(-1.25em);
 }
 
 .wakechef-cook-mode__input:focus-visible + .wakechef-cook-mode__switch {
@@ -114,6 +118,10 @@
 	content: "\2192";
 }
 
+[dir="rtl"] .wakechef-cook-mode__start::after {
+	content: "\2190";
+}
+
 .wakechef-cook-mode__start:hover {
 	filter: brightness(1.08);
 }
@@ -147,7 +155,7 @@ html.wakechef-cook-view-open body {
 	font-family: inherit;
 	font-size: 19px;
 	line-height: 1.5;
-	text-align: left;
+	text-align: start;
 }
 
 .wakechef-cook-view[hidden] {
@@ -294,7 +302,7 @@ html.wakechef-awake .wakechef-cook-view__awake {
 }
 
 .wakechef-cook-view__ingredients {
-	border-right: 1px solid var(--wcv-line);
+	border-inline-end: 1px solid var(--wcv-line);
 	background: var(--wcv-soft);
 }
 
@@ -388,7 +396,7 @@ html.wakechef-awake .wakechef-cook-view__awake {
 }
 
 .wakechef-cook-view__reset {
-	margin-right: auto !important;
+	margin-inline-end: auto !important;
 	padding: 0.5em 0;
 	border: 0;
 	background: none;
@@ -434,7 +442,7 @@ html.wakechef-awake .wakechef-cook-view__awake {
 	}
 
 	.wakechef-cook-view__ingredients {
-		border-right: 0;
+		border-inline-end: 0;
 		background: none;
 	}
 

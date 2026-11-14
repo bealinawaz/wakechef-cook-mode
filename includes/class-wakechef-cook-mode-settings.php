@@ -41,9 +41,44 @@ final class WakeChef_Cook_Mode_Settings {
 	 * @return array
 	 */
 	public static function get() {
-		$settings = wp_parse_args( (array) get_option( self::OPTION, array() ), self::defaults() );
+		$settings = wp_parse_args( self::without_defaults( (array) get_option( self::OPTION, array() ) ), self::defaults() );
 		if ( '' === trim( $settings['label'] ) ) {
 			$settings['label'] = self::defaults()['label'];
+		}
+		return $settings;
+	}
+
+	/**
+	 * Whether WP Recipe Maker is active.
+	 *
+	 * @return bool
+	 */
+	/**
+	 * Visitor-facing text settings and their original English defaults.
+	 *
+	 * @return array
+	 */
+	private static function source_texts() {
+		return array(
+			'label'       => 'Cook Mode',
+			'description' => 'Keep your screen awake while you cook',
+			'start_label' => 'Start cooking',
+		);
+	}
+
+	/**
+	 * Removes text settings that match the default (in English or in the current language),
+	 * so the translated default is used at runtime.
+	 *
+	 * @param array $settings Settings.
+	 * @return array
+	 */
+	private static function without_defaults( array $settings ) {
+		$defaults = self::defaults();
+		foreach ( self::source_texts() as $key => $source ) {
+			if ( isset( $settings[ $key ] ) && ( $source === $settings[ $key ] || $defaults[ $key ] === $settings[ $key ] ) ) {
+				unset( $settings[ $key ] );
+			}
 		}
 		return $settings;
 	}
@@ -89,6 +124,9 @@ final class WakeChef_Cook_Mode_Settings {
 
 		$categories                = isset( $input['auto_categories'] ) ? array_map( 'absint', (array) $input['auto_categories'] ) : array();
 		$output['auto_categories'] = array_values( array_filter( $categories ) );
+
+		// Text left at its default is not saved, so visitors see it in their own language.
+		$output = self::without_defaults( $output );
 
 		return $output;
 	}

@@ -400,6 +400,9 @@
 		} );
 		close.addEventListener( 'click', closeView );
 
+		// In right-to-left languages the next step is to the left.
+		var rtl = 'rtl' === getComputedStyle( document.documentElement ).direction;
+
 		view.addEventListener( 'keydown', function ( event ) {
 			if ( 'Escape' === event.key ) {
 				event.preventDefault();
@@ -408,7 +411,7 @@
 				trapFocus( event );
 			} else if ( ( 'ArrowRight' === event.key || 'ArrowLeft' === event.key ) && ! /^(INPUT|TEXTAREA|SELECT)$/.test( event.target.tagName ) ) {
 				event.preventDefault();
-				go( 'ArrowRight' === event.key ? 1 : -1 );
+				go( ( 'ArrowRight' === event.key ) !== rtl ? 1 : -1 );
 			}
 		} );
 
@@ -427,7 +430,7 @@
 			var dy = event.changedTouches[ 0 ].clientY - startY;
 			startX = null;
 			if ( Math.abs( dx ) > 50 && Math.abs( dx ) > Math.abs( dy ) * 1.5 ) {
-				go( dx < 0 ? 1 : -1 );
+				go( ( dx < 0 ) !== rtl ? 1 : -1 );
 			}
 		} );
 
