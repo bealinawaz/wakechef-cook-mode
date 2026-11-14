@@ -41,7 +41,7 @@ The Cook view reads the recipe data (schema.org Recipe) that recipe card plugins
 * If the reader switches apps or tabs, Cook Mode resumes automatically when they come back.
 * Every toggle on a page stays in sync, even with several recipes on one page.
 * Accessible: a real switch with a label, keyboard support, and status announcements for screen readers.
-* Lightweight: a few kilobytes of plain JavaScript, no jQuery, and assets load only on pages that show the toggle.
+* Lightweight: about 5 KB of plain JavaScript once compressed, no jQuery, and assets load only on pages that show the toggle.
 * Hidden when a recipe is printed.
 
 **Customize it**
