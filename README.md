@@ -2,7 +2,7 @@
 
 [WakeChef Cook Mode on WordPress.org](https://wordpress.org/plugins/wakechef-cook-mode/) · formerly Recipe Cook Mode
 
-A WordPress plugin that adds a Cook Mode toggle to recipes. When a reader switches it on, their screen stays awake until they switch it off or leave the page, so it doesn't go dark while they cook.
+A WordPress plugin that adds a Cook Mode toggle to recipes. When a reader switches it on, their screen stays awake until they switch it off or leave the page, so it doesn't go dark while they cook. A **Start cooking** button opens the recipe as a full-screen, step-by-step Cook view that works with any recipe card plugin.
 
 ![Tested up to WordPress 7.1](https://img.shields.io/badge/WordPress-7.1-blue)
 ![PHP 7.4 to 8.5](https://img.shields.io/badge/PHP-7.4%E2%80%938.5-777bb4)
@@ -10,6 +10,7 @@ A WordPress plugin that adds a Cook Mode toggle to recipes. When a reader switch
 
 ## Features
 
+- **Cook view (1.1.0):** ingredients with checkboxes and one step at a time in large text, with Next/Previous, arrow keys, and swipe, recipe sections, four text sizes, dark mode, and progress remembered in the reader's browser. The screen stays awake while it is open. It is built from the page's schema.org `Recipe` JSON-LD (any `@graph`, `HowToStep`, `HowToSection`, plain-string, or newline-separated instructions), so it works with WP Recipe Maker, Tasty Recipes, Create, WP Delicious, Recipe Card Blocks, Zip Recipes, Cooked, and others. The button stays hidden on pages without recipe instructions.
 - **WP Recipe Maker:** one checkbox adds the toggle to every recipe card, at the top or bottom. No template editing needed.
 - **Any post type or category:** automatically add the toggle to posts, pages, or custom post types, optionally limited to chosen categories. Works with recipes from any plugin or written straight into the post.
 - **Block:** a Cook Mode block for the block editor, with per-block label and description.
@@ -23,7 +24,7 @@ If a post contains a WP Recipe Maker card, a Cook Mode block, or the shortcode, 
 
 ## How it works
 
-Cook Mode uses the browser's [Screen Wake Lock API](https://developer.mozilla.org/en-US/docs/Web/API/Screen_Wake_Lock_API), supported in current Chrome, Edge, Safari (16.4+), and Firefox. In browsers without support, the toggle is disabled and explains why. Nothing is sent to any server.
+Cook Mode uses the browser's [Screen Wake Lock API](https://developer.mozilla.org/en-US/docs/Web/API/Screen_Wake_Lock_API), supported in current Chrome, Edge, Safari (16.4+), and Firefox. In browsers without support, the toggle is disabled and explains why, and the Cook view still opens. Nothing is sent to any server: the Cook view reads the recipe data already on the page.
 
 ## Setup
 

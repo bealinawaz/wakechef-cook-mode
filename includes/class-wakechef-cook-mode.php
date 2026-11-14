@@ -56,6 +56,23 @@ final class WakeChef_Cook_Mode {
 				'paused'      => __( 'Cook Mode is paused. It will resume when you return to this page.', 'wakechef-cook-mode' ),
 				'unsupported' => __( 'Cook Mode is not supported in this browser.', 'wakechef-cook-mode' ),
 				'failed'      => __( 'Cook Mode could not be turned on. Check your battery saver settings and try again.', 'wakechef-cook-mode' ),
+				'view'        => array(
+					'close'         => __( 'Close', 'wakechef-cook-mode' ),
+					'ingredients'   => __( 'Ingredients', 'wakechef-cook-mode' ),
+					'steps'         => __( 'Steps', 'wakechef-cook-mode' ),
+					/* translators: 1: current step number, 2: number of steps. */
+					'stepOf'        => __( 'Step %1$s of %2$s', 'wakechef-cook-mode' ),
+					'previous'      => __( 'Previous step', 'wakechef-cook-mode' ),
+					'next'          => __( 'Next step', 'wakechef-cook-mode' ),
+					'finish'        => __( 'Finish', 'wakechef-cook-mode' ),
+					'smaller'       => __( 'Smaller text', 'wakechef-cook-mode' ),
+					'larger'        => __( 'Larger text', 'wakechef-cook-mode' ),
+					/* translators: %s: number of servings or yield, for example "4 servings". */
+					'yield'         => __( 'Makes %s', 'wakechef-cook-mode' ),
+					'awake'         => __( 'Screen stays awake', 'wakechef-cook-mode' ),
+					'reset'         => __( 'Start over', 'wakechef-cook-mode' ),
+					'noIngredients' => __( 'This recipe lists no ingredients.', 'wakechef-cook-mode' ),
+				),
 			)
 		);
 
@@ -223,6 +240,9 @@ final class WakeChef_Cook_Mode {
 				<p class="wakechef-cook-mode__description" id="<?php echo esc_attr( $id . '-description' ); ?>"><?php echo esc_html( $description ); ?></p>
 			<?php endif; ?>
 			<p class="wakechef-cook-mode__status" role="status" aria-live="polite"></p>
+			<?php if ( $settings['cook_view'] ) : ?>
+				<p class="wakechef-cook-mode__start-wrap" hidden><button type="button" class="wakechef-cook-mode__start" aria-haspopup="dialog"><?php echo esc_html( $settings['start_label'] ); ?></button></p>
+			<?php endif; ?>
 		</div>
 		<?php
 		return (string) ob_get_clean();

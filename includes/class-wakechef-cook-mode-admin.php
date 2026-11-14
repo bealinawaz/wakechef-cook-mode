@@ -71,9 +71,43 @@ final class WakeChef_Cook_Mode_Admin {
 		);
 
 		add_settings_section( 'wakechef_cook_mode_text', __( 'Toggle', 'wakechef-cook-mode' ), '__return_false', self::PAGE );
-		add_settings_field( 'label', __( 'Label', 'wakechef-cook-mode' ), array( __CLASS__, 'text_field' ), self::PAGE, 'wakechef_cook_mode_text', array( 'key' => 'label', 'label_for' => 'wakechef-cook-mode-label' ) );
-		add_settings_field( 'description', __( 'Description', 'wakechef-cook-mode' ), array( __CLASS__, 'text_field' ), self::PAGE, 'wakechef_cook_mode_text', array( 'key' => 'description', 'label_for' => 'wakechef-cook-mode-description' ) );
+		add_settings_field(
+			'label',
+			__( 'Label', 'wakechef-cook-mode' ),
+			array( __CLASS__, 'text_field' ),
+			self::PAGE,
+			'wakechef_cook_mode_text',
+			array(
+				'key'       => 'label',
+				'label_for' => 'wakechef-cook-mode-label',
+			)
+		);
+		add_settings_field(
+			'description',
+			__( 'Description', 'wakechef-cook-mode' ),
+			array( __CLASS__, 'text_field' ),
+			self::PAGE,
+			'wakechef_cook_mode_text',
+			array(
+				'key'       => 'description',
+				'label_for' => 'wakechef-cook-mode-description',
+			)
+		);
 		add_settings_field( 'color', __( 'Color', 'wakechef-cook-mode' ), array( __CLASS__, 'color_field' ), self::PAGE, 'wakechef_cook_mode_text', array( 'label_for' => 'wakechef-cook-mode-color' ) );
+
+		add_settings_section( 'wakechef_cook_mode_view', __( 'Cook view', 'wakechef-cook-mode' ), array( __CLASS__, 'view_intro' ), self::PAGE );
+		add_settings_field( 'cook_view', __( 'Start cooking button', 'wakechef-cook-mode' ), array( __CLASS__, 'view_field' ), self::PAGE, 'wakechef_cook_mode_view' );
+		add_settings_field(
+			'start_label',
+			__( 'Button label', 'wakechef-cook-mode' ),
+			array( __CLASS__, 'text_field' ),
+			self::PAGE,
+			'wakechef_cook_mode_view',
+			array(
+				'key'       => 'start_label',
+				'label_for' => 'wakechef-cook-mode-start_label',
+			)
+		);
 
 		add_settings_section( 'wakechef_cook_mode_wprm', __( 'WP Recipe Maker', 'wakechef-cook-mode' ), array( __CLASS__, 'wprm_intro' ), self::PAGE );
 		add_settings_field( 'wprm_enabled', __( 'Recipe cards', 'wakechef-cook-mode' ), array( __CLASS__, 'wprm_field' ), self::PAGE, 'wakechef_cook_mode_wprm' );
@@ -81,7 +115,36 @@ final class WakeChef_Cook_Mode_Admin {
 		add_settings_section( 'wakechef_cook_mode_auto', __( 'Automatic placement', 'wakechef-cook-mode' ), array( __CLASS__, 'auto_intro' ), self::PAGE );
 		add_settings_field( 'auto_post_types', __( 'Post types', 'wakechef-cook-mode' ), array( __CLASS__, 'post_types_field' ), self::PAGE, 'wakechef_cook_mode_auto' );
 		add_settings_field( 'auto_categories', __( 'Only in categories', 'wakechef-cook-mode' ), array( __CLASS__, 'categories_field' ), self::PAGE, 'wakechef_cook_mode_auto' );
-		add_settings_field( 'auto_position', __( 'Position', 'wakechef-cook-mode' ), array( __CLASS__, 'position_field' ), self::PAGE, 'wakechef_cook_mode_auto', array( 'key' => 'auto_position', 'label_for' => 'wakechef-cook-mode-auto_position' ) );
+		add_settings_field(
+			'auto_position',
+			__( 'Position', 'wakechef-cook-mode' ),
+			array( __CLASS__, 'position_field' ),
+			self::PAGE,
+			'wakechef_cook_mode_auto',
+			array(
+				'key'       => 'auto_position',
+				'label_for' => 'wakechef-cook-mode-auto_position',
+			)
+		);
+	}
+
+	/**
+	 * Explains the Cook view.
+	 */
+	public static function view_intro() {
+		echo '<p>' . esc_html__( 'The Cook view opens the recipe full screen: ingredients to tick off and one step at a time, in large text, with the screen kept awake. It reads the recipe data (schema.org Recipe) that recipe card plugins such as WP Recipe Maker, Tasty Recipes, Create, WP Delicious, and Recipe Card Blocks add to the page, so it works with any of them. The button appears next to the Cook Mode toggle, and only on pages that have recipe data.', 'wakechef-cook-mode' ) . '</p>';
+	}
+
+	/**
+	 * Cook view checkbox.
+	 */
+	public static function view_field() {
+		printf(
+			'<label><input type="checkbox" name="%1$s" value="1" %2$s /> %3$s</label>',
+			esc_attr( self::name( 'cook_view' ) ),
+			checked( WakeChef_Cook_Mode_Settings::get()['cook_view'], true, false ),
+			esc_html__( 'Show a button that opens the recipe step by step, full screen', 'wakechef-cook-mode' )
+		);
 	}
 
 	/**

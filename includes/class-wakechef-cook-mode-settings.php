@@ -30,6 +30,8 @@ final class WakeChef_Cook_Mode_Settings {
 			'auto_post_types' => array(),
 			'auto_categories' => array(),
 			'auto_position'   => 'top',
+			'cook_view'       => true,
+			'start_label'     => __( 'Start cooking', 'wakechef-cook-mode' ),
 		);
 	}
 
@@ -73,6 +75,9 @@ final class WakeChef_Cook_Mode_Settings {
 		$output['color'] = $color ? $color : $defaults['color'];
 
 		$output['wprm_enabled'] = ! empty( $input['wprm_enabled'] );
+		$output['cook_view']    = ! empty( $input['cook_view'] );
+		$start                  = isset( $input['start_label'] ) ? sanitize_text_field( $input['start_label'] ) : '';
+		$output['start_label']  = '' !== trim( $start ) ? $start : $defaults['start_label'];
 		foreach ( array( 'wprm_position', 'auto_position' ) as $key ) {
 			$position       = isset( $input[ $key ] ) ? (string) $input[ $key ] : 'top';
 			$output[ $key ] = in_array( $position, self::POSITIONS, true ) ? $position : 'top';

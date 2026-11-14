@@ -82,6 +82,405 @@
 	opacity: 1;
 }
 
+/* Start cooking button */
+.wakechef-cook-mode__start-wrap {
+	margin: 0.6em 0 0.1em;
+}
+
+.wakechef-cook-mode__start-wrap[hidden] {
+	display: none;
+}
+
+.wakechef-cook-mode__start {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4em;
+	margin: 0;
+	padding: 0.55em 1.1em;
+	border: 0;
+	border-radius: 999px;
+	background: var(--wakechef-cook-mode-color);
+	color: #fff;
+	font: inherit;
+	font-weight: 600;
+	line-height: 1.2;
+	text-transform: none;
+	letter-spacing: normal;
+	cursor: pointer;
+	box-shadow: none;
+}
+
+.wakechef-cook-mode__start::after {
+	content: "\2192";
+}
+
+.wakechef-cook-mode__start:hover {
+	filter: brightness(1.08);
+}
+
+.wakechef-cook-mode__start:focus-visible {
+	outline: 2px solid var(--wakechef-cook-mode-color);
+	outline-offset: 3px;
+}
+
+/* Cook view */
+html.wakechef-cook-view-open,
+html.wakechef-cook-view-open body {
+	overflow: hidden;
+}
+
+.wakechef-cook-view {
+	--wcv-bg: #fff;
+	--wcv-text: #111;
+	--wcv-muted: #555;
+	--wcv-line: #dcdcde;
+	--wcv-soft: #f4f4f5;
+	position: fixed;
+	inset: 0;
+	z-index: 1000000;
+	display: flex;
+	flex-direction: column;
+	-webkit-tap-highlight-color: transparent;
+	box-sizing: border-box;
+	background: var(--wcv-bg);
+	color: var(--wcv-text);
+	font-family: inherit;
+	font-size: 19px;
+	line-height: 1.5;
+	text-align: left;
+}
+
+.wakechef-cook-view[hidden] {
+	display: none;
+}
+
+.wakechef-cook-view *,
+.wakechef-cook-view *::before,
+.wakechef-cook-view *::after {
+	box-sizing: border-box;
+}
+
+.wakechef-cook-view[data-size="0"] { font-size: 16px; }
+.wakechef-cook-view[data-size="2"] { font-size: 22px; }
+.wakechef-cook-view[data-size="3"] { font-size: 26px; }
+
+.wakechef-cook-view button {
+	margin: 0;
+	font: inherit;
+	line-height: 1.2;
+	text-transform: none;
+	letter-spacing: normal;
+	box-shadow: none;
+	cursor: pointer;
+}
+
+.wakechef-cook-view button:focus-visible,
+.wakechef-cook-view input:focus-visible {
+	outline: 3px solid var(--wakechef-cook-mode-color);
+	outline-offset: 2px;
+}
+
+.wakechef-cook-view button:disabled {
+	opacity: 0.4;
+	cursor: default;
+}
+
+.wakechef-cook-view__head {
+	display: flex;
+	flex: none;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 1em;
+	padding: max(0.9em, env(safe-area-inset-top)) 1.2em 0.8em;
+	border-bottom: 1px solid var(--wcv-line);
+}
+
+.wakechef-cook-view__title {
+	margin: 0;
+	color: inherit;
+	font-family: inherit;
+	font-size: 1.25em;
+	font-weight: 700;
+	line-height: 1.25;
+}
+
+.wakechef-cook-view__meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.3em 1em;
+	margin: 0.25em 0 0;
+	color: var(--wcv-muted);
+	font-size: 0.8em;
+}
+
+.wakechef-cook-view__awake {
+	display: none;
+	align-items: center;
+	gap: 0.4em;
+}
+
+.wakechef-cook-view__awake::before {
+	content: "";
+	width: 0.6em;
+	height: 0.6em;
+	border-radius: 50%;
+	background: var(--wakechef-cook-mode-color);
+}
+
+html.wakechef-awake .wakechef-cook-view__awake {
+	display: inline-flex;
+}
+
+.wakechef-cook-view__tools {
+	display: flex;
+	flex: none;
+	gap: 0.4em;
+}
+
+.wakechef-cook-view__size,
+.wakechef-cook-view__close {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.4em;
+	height: 2.4em;
+	padding: 0;
+	border: 1px solid var(--wcv-line);
+	border-radius: 50%;
+	background: var(--wcv-bg);
+	color: var(--wcv-text);
+	font-weight: 700;
+}
+
+.wakechef-cook-view__size.is-smaller span { font-size: 0.75em; }
+.wakechef-cook-view__size.is-larger span { font-size: 1.1em; }
+
+.wakechef-cook-view__tabs {
+	display: none;
+	flex: none;
+	gap: 0.4em;
+	padding: 0.6em 1.2em 0;
+}
+
+.wakechef-cook-view__tab {
+	flex: 1;
+	padding: 0.6em;
+	border: 1px solid var(--wcv-line);
+	border-radius: 0.5em;
+	background: var(--wcv-bg);
+	color: var(--wcv-text);
+	font-weight: 600;
+}
+
+.wakechef-cook-view__tab[aria-selected="true"] {
+	border-color: var(--wakechef-cook-mode-color);
+	background: var(--wakechef-cook-mode-color);
+	color: #fff;
+}
+
+.wakechef-cook-view__body {
+	display: grid;
+	flex: 1;
+	grid-template-columns: minmax(16em, 1fr) 2fr;
+	min-height: 0;
+}
+
+.wakechef-cook-view__ingredients,
+.wakechef-cook-view__steps {
+	min-height: 0;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+	padding: 1em 1.2em 1.5em;
+}
+
+.wakechef-cook-view__ingredients {
+	border-right: 1px solid var(--wcv-line);
+	background: var(--wcv-soft);
+}
+
+.wakechef-cook-view__heading {
+	margin: 0 0 0.6em;
+	color: var(--wcv-muted);
+	font-family: inherit;
+	font-size: 0.8em;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+
+.wakechef-cook-view__list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.wakechef-cook-view__list li {
+	margin: 0;
+	padding: 0;
+	border-bottom: 1px solid var(--wcv-line);
+}
+
+.wakechef-cook-view__list label {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.7em;
+	padding: 0.55em 0;
+	cursor: pointer;
+}
+
+.wakechef-cook-view .wakechef-cook-view__list input[type="checkbox"] {
+	flex: none;
+	font-size: inherit;
+	width: 1.25em;
+	min-width: 1.25em;
+	height: 1.25em;
+	padding: 0;
+	margin: 0.15em 0 0;
+	accent-color: var(--wakechef-cook-mode-color);
+}
+
+.wakechef-cook-view__list input:checked + span {
+	color: var(--wcv-muted);
+	text-decoration: line-through;
+}
+
+.wakechef-cook-view__steps {
+	display: flex;
+	flex-direction: column;
+	max-width: 46em;
+}
+
+.wakechef-cook-view__progress {
+	height: 0.3em;
+	margin: 0 0 1.2em;
+	border-radius: 1em;
+	background: var(--wcv-line);
+	overflow: hidden;
+}
+
+.wakechef-cook-view__progress span {
+	display: block;
+	height: 100%;
+	border-radius: 1em;
+	background: var(--wakechef-cook-mode-color);
+	transition: width 0.25s;
+}
+
+.wakechef-cook-view__section {
+	margin: 0 0 0.4em;
+	color: var(--wakechef-cook-mode-color);
+	font-weight: 700;
+}
+
+.wakechef-cook-view__step {
+	margin: 0;
+	font-size: 1.45em;
+	line-height: 1.45;
+}
+
+.wakechef-cook-view__foot {
+	display: flex;
+	flex: none;
+	align-items: center;
+	gap: 0.6em;
+	padding: 0.8em 1.2em max(0.8em, env(safe-area-inset-bottom));
+	border-top: 1px solid var(--wcv-line);
+}
+
+.wakechef-cook-view__reset {
+	margin-right: auto !important;
+	padding: 0.5em 0;
+	border: 0;
+	background: none;
+	color: var(--wcv-muted);
+	text-decoration: underline;
+}
+
+.wakechef-cook-view__prev,
+.wakechef-cook-view__next {
+	min-width: 7em;
+	padding: 0.8em 1.3em;
+	border-radius: 0.6em;
+	font-weight: 700;
+}
+
+.wakechef-cook-view__prev {
+	border: 1px solid var(--wcv-line);
+	background: var(--wcv-bg);
+	color: var(--wcv-text);
+}
+
+.wakechef-cook-view__next {
+	border: 1px solid var(--wakechef-cook-mode-color);
+	background: var(--wakechef-cook-mode-color);
+	color: #fff;
+}
+
+@media (max-width: 760px) {
+	.wakechef-cook-view {
+		font-size: 17px;
+	}
+
+	.wakechef-cook-view[data-size="0"] { font-size: 15px; }
+	.wakechef-cook-view[data-size="2"] { font-size: 20px; }
+	.wakechef-cook-view[data-size="3"] { font-size: 23px; }
+
+	.wakechef-cook-view__tabs {
+		display: flex;
+	}
+
+	.wakechef-cook-view__body {
+		grid-template-columns: 1fr;
+	}
+
+	.wakechef-cook-view__ingredients {
+		border-right: 0;
+		background: none;
+	}
+
+	/* The tab already names the panel. */
+	.wakechef-cook-view__ingredients .wakechef-cook-view__heading {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+	}
+
+	.wakechef-cook-view[data-tab="steps"] .wakechef-cook-view__ingredients,
+	.wakechef-cook-view[data-tab="ingredients"] .wakechef-cook-view__steps {
+		display: none;
+	}
+
+	.wakechef-cook-view__prev,
+	.wakechef-cook-view__next {
+		flex: 1;
+		min-width: 0;
+		padding: 0.85em 0.6em;
+	}
+
+	.wakechef-cook-view__reset {
+		display: none;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.wakechef-cook-view {
+		--wcv-bg: #111214;
+		--wcv-text: #f2f2f3;
+		--wcv-muted: #a5a7ab;
+		--wcv-line: #33353a;
+		--wcv-soft: #18191c;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.wakechef-cook-view__progress span {
+		transition: none;
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.wakechef-cook-mode__switch,
 	.wakechef-cook-mode__switch::after {
@@ -90,7 +489,8 @@
 }
 
 @media print {
-	.wakechef-cook-mode {
+	.wakechef-cook-mode,
+	.wakechef-cook-view {
 		display: none !important;
 	}
 }
