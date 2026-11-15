@@ -12,6 +12,13 @@
 	var wanted = false;
 	var supported = 'wakeLock' in navigator;
 
+	// Tells add-ons what the reader does: listen with document.addEventListener( 'wakechef:cookview:open', ... ).
+	function emit( name, detail ) {
+		if ( 'function' === typeof window.CustomEvent ) {
+			document.dispatchEvent( new CustomEvent( 'wakechef:' + name, { detail: detail } ) );
+		}
+	}
+
 	/* ------------------------------------------------------------------
 	 * Screen wake lock, shared by the toggles and the Cook view.
 	 * ------------------------------------------------------------------ */
@@ -145,7 +152,7 @@
 		}
 		var t = stepText( value );
 		if ( t ) {
-			out.push( { section: section, text: t } );
+			out.push( { section: section, text: t, source: value } );
 		}
 		return out;
 	}
@@ -183,6 +190,7 @@
 					yield: readYield( recipes[ i ].recipeYield ),
 					ingredients: ingredients,
 					steps: steps,
+					source: recipes[ i ],
 				};
 			}
 		}
@@ -367,6 +375,7 @@
 		function go( delta ) {
 			var target = state.step + delta;
 			if ( target >= recipe.steps.length ) {
+				emit( 'cookview:finish', { recipe: recipe, view: view } );
 				closeView();
 				return;
 			}
@@ -451,6 +460,7 @@
 			tabIngredients.setAttribute( 'aria-selected', String( 'ingredients' === state.tab ) );
 			tabSteps.setAttribute( 'aria-selected', String( 'steps' === state.tab ) );
 			save();
+			emit( 'cookview:step', { recipe: recipe, view: view, index: state.step, step: step, element: current } );
 		}
 
 		view.update = update;
@@ -498,6 +508,7 @@
 			enable();
 		}
 		view.querySelector( '.wakechef-cook-view__close' ).focus();
+		emit( 'cookview:open', { recipe: recipe, view: view } );
 	}
 
 	function closeView() {
@@ -510,6 +521,7 @@
 		if ( opener ) {
 			opener.focus();
 		}
+		emit( 'cookview:close', { recipe: recipe, view: view } );
 	}
 
 	/* ------------------------------------------------------------------
@@ -549,6 +561,7 @@
 				} else {
 					disable();
 				}
+				emit( 'cookmode:change', { on: event.target.checked } );
 			} );
 		} );
 

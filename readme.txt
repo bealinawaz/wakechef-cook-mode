@@ -5,7 +5,7 @@ Tags: cook mode, keep screen awake, recipe, cooking, food blog
 Requires at least: 6.2
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,6 +109,9 @@ The plugin is ready for translation, and translations are made by volunteers on 
 
 == Changelog ==
 
+= 1.1.2 (2026-11-15) =
+* Developers: the Cook view now fires JavaScript events on `document` that add-ons can listen to: `wakechef:cookmode:change`, `wakechef:cookview:open`, `wakechef:cookview:step`, `wakechef:cookview:finish` and `wakechef:cookview:close`. Nothing changes for readers.
+
 = 1.1.1 (2026-11-15) =
 * Fixed: the Cook Mode block's labels in the block editor can now be translated (the block's JavaScript translations are loaded from WordPress.org language packs).
 * Right-to-left languages: the toggle, the Start cooking arrow and the Cook view layout follow the page direction, and swiping and arrow keys move the right way in Arabic, Hebrew, Urdu and other RTL languages.
@@ -125,6 +128,9 @@ The plugin is ready for translation, and translations are made by volunteers on 
 * Initial release.
 
 == Upgrade Notice ==
+
+= 1.1.2 =
+Adds JavaScript events for add-ons. Nothing to change.
 
 = 1.1.1 =
 Translation and right-to-left language improvements. Nothing to change.
