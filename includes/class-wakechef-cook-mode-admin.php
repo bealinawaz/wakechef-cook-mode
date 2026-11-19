@@ -15,6 +15,20 @@ final class WakeChef_Cook_Mode_Admin {
 	const PAGE = 'wakechef-cook-mode';
 
 	/**
+	 * Page of the WakeChef Cook Mode Pro add-on on the author's site.
+	 */
+	const PRO_URL = 'https://bealinawaz.com/wordpress-plugins/pro/wakechef/';
+
+	/**
+	 * Whether the WakeChef Cook Mode Pro add-on is active. Checked inside hooks, after all plugins have loaded.
+	 *
+	 * @return bool
+	 */
+	public static function pro_active() {
+		return defined( 'WAKECHEF_COOK_MODE_PRO_VERSION' );
+	}
+
+	/**
 	 * Registers admin hooks.
 	 */
 	public static function init() {
@@ -22,6 +36,7 @@ final class WakeChef_Cook_Mode_Admin {
 		add_action( 'admin_init', array( __CLASS__, 'register_settings' ) );
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue' ) );
 		add_filter( 'plugin_action_links_' . plugin_basename( WAKECHEF_COOK_MODE_FILE ), array( __CLASS__, 'action_links' ) );
+		add_filter( 'plugin_row_meta', array( __CLASS__, 'plugin_row_meta' ), 10, 2 );
 	}
 
 	/**
@@ -40,6 +55,20 @@ final class WakeChef_Cook_Mode_Admin {
 	public static function action_links( $links ) {
 		array_unshift( $links, '<a href="' . esc_url( admin_url( 'options-general.php?page=' . self::PAGE ) ) . '">' . esc_html__( 'Settings', 'wakechef-cook-mode' ) . '</a>' );
 		return $links;
+	}
+
+	/**
+	 * Adds a "WakeChef Cook Mode Pro" link to the plugin's row on the Plugins screen, only while Pro isn't active.
+	 *
+	 * @param array  $meta Row meta links.
+	 * @param string $file Plugin file.
+	 * @return array
+	 */
+	public static function plugin_row_meta( $meta, $file ) {
+		if ( plugin_basename( WAKECHEF_COOK_MODE_FILE ) === $file && ! self::pro_active() ) {
+			$meta[] = '<a href="' . esc_url( self::PRO_URL ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'WakeChef Cook Mode Pro', 'wakechef-cook-mode' ) . '</a>';
+		}
+		return $meta;
 	}
 
 	/**
@@ -290,6 +319,27 @@ final class WakeChef_Cook_Mode_Admin {
 				submit_button();
 				?>
 			</form>
+			<?php self::render_pro_box(); ?>
+		</div>
+		<?php
+	}
+
+	/**
+	 * One short note about the Pro add-on below the settings, only while Pro isn't active.
+	 */
+	private static function render_pro_box() {
+		if ( self::pro_active() ) {
+			return;
+		}
+		?>
+		<div class="card">
+			<h2><?php esc_html_e( 'Need more? WakeChef Cook Mode Pro', 'wakechef-cook-mode' ); ?></h2>
+			<ul class="ul-disc">
+				<li><?php esc_html_e( 'Step timers from the times in each step, several timers at once, and an alarm when time is up.', 'wakechef-cook-mode' ); ?></li>
+				<li><?php esc_html_e( 'Serving scaling: readers change the servings and the ingredient amounts update, fractions and metric/US pairs included.', 'wakechef-cook-mode' ); ?></li>
+				<li><?php esc_html_e( 'Cook Mode stats for each recipe, with a CSV download and optional Google Analytics 4 events. No cookies or IP addresses.', 'wakechef-cook-mode' ); ?></li>
+			</ul>
+			<p><a class="button" href="<?php echo esc_url( self::PRO_URL ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'See WakeChef Cook Mode Pro', 'wakechef-cook-mode' ); ?></a></p>
 		</div>
 		<?php
 	}

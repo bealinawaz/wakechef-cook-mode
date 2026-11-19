@@ -2,21 +2,21 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: WakeChef Cook Mode 1.1.2\n"
+"Project-Id-Version: WakeChef Cook Mode 1.1.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wakechef-cook-mode\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-15T15:08:14+00:00\n"
+"POT-Creation-Date: 2026-11-19T06:33:05+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: wakechef-cook-mode\n"
 
 #. Plugin Name of the plugin
 #: wakechef-cook-mode.php
-#: includes/class-wakechef-cook-mode-admin.php:31
+#: includes/class-wakechef-cook-mode-admin.php:46
 msgid "WakeChef Cook Mode"
 msgstr ""
 
@@ -40,102 +40,126 @@ msgstr ""
 msgid "https://bealinawaz.com"
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:41
+#: includes/class-wakechef-cook-mode-admin.php:56
 msgid "Settings"
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:73
+#: includes/class-wakechef-cook-mode-admin.php:69
+msgid "WakeChef Cook Mode Pro"
+msgstr ""
+
+#: includes/class-wakechef-cook-mode-admin.php:102
 msgid "Toggle"
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:76
+#: includes/class-wakechef-cook-mode-admin.php:105
 #: assets/block.js:23
 msgid "Label"
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:87
+#: includes/class-wakechef-cook-mode-admin.php:116
 #: assets/block.js:31
 msgid "Description"
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:96
+#: includes/class-wakechef-cook-mode-admin.php:125
 msgid "Color"
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:98
+#: includes/class-wakechef-cook-mode-admin.php:127
 msgid "Cook view"
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:99
+#: includes/class-wakechef-cook-mode-admin.php:128
 msgid "Start cooking button"
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:102
+#: includes/class-wakechef-cook-mode-admin.php:131
 msgid "Button label"
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:112
+#: includes/class-wakechef-cook-mode-admin.php:141
 msgid "WP Recipe Maker"
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:113
+#: includes/class-wakechef-cook-mode-admin.php:142
 msgid "Recipe cards"
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:115
+#: includes/class-wakechef-cook-mode-admin.php:144
 msgid "Automatic placement"
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:116
+#: includes/class-wakechef-cook-mode-admin.php:145
 msgid "Post types"
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:117
+#: includes/class-wakechef-cook-mode-admin.php:146
 msgid "Only in categories"
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:120
+#: includes/class-wakechef-cook-mode-admin.php:149
 msgid "Position"
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:135
+#: includes/class-wakechef-cook-mode-admin.php:164
 msgid "The Cook view opens the recipe full screen: ingredients to tick off and one step at a time, in large text, with the screen kept awake. It reads the recipe data (schema.org Recipe) that recipe card plugins such as WP Recipe Maker, Tasty Recipes, Create, WP Delicious, and Recipe Card Blocks add to the page, so it works with any of them. The button appears next to the Cook Mode toggle, and only on pages that have recipe data."
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:146
+#: includes/class-wakechef-cook-mode-admin.php:175
 msgid "Show a button that opens the recipe step by step, full screen"
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:194
+#: includes/class-wakechef-cook-mode-admin.php:223
 msgid "Top"
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:195
+#: includes/class-wakechef-cook-mode-admin.php:224
 msgid "Bottom"
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:204
+#: includes/class-wakechef-cook-mode-admin.php:233
 msgid "Install and activate WP Recipe Maker to add the toggle to its recipe cards automatically."
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:217
+#: includes/class-wakechef-cook-mode-admin.php:246
 msgid "Add the toggle to every WP Recipe Maker recipe card"
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:219
+#: includes/class-wakechef-cook-mode-admin.php:248
 msgid "Position on the card:"
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:232
+#: includes/class-wakechef-cook-mode-admin.php:261
 msgid "Add the toggle to posts that are not WP Recipe Maker recipes, such as recipes from another plugin or written in the post content. You can also place it anywhere with the Cook Mode block or the [wakechef_cook_mode] shortcode."
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:272
+#: includes/class-wakechef-cook-mode-admin.php:301
 msgid "Applies to posts. Leave all unchecked to include every category."
 msgstr ""
 
-#: includes/class-wakechef-cook-mode-admin.php:285
+#: includes/class-wakechef-cook-mode-admin.php:314
 msgid "Cook Mode uses the Screen Wake Lock API to keep a visitor's screen on while they follow a recipe. It works in current versions of Chrome, Edge, Safari, and Firefox. In browsers without support, the toggle explains that Cook Mode is unavailable."
+msgstr ""
+
+#: includes/class-wakechef-cook-mode-admin.php:336
+msgid "Need more? WakeChef Cook Mode Pro"
+msgstr ""
+
+#: includes/class-wakechef-cook-mode-admin.php:338
+msgid "Step timers from the times in each step, several timers at once, and an alarm when time is up."
+msgstr ""
+
+#: includes/class-wakechef-cook-mode-admin.php:339
+msgid "Serving scaling: readers change the servings and the ingredient amounts update, fractions and metric/US pairs included."
+msgstr ""
+
+#: includes/class-wakechef-cook-mode-admin.php:340
+msgid "Cook Mode stats for each recipe, with a CSV download and optional Google Analytics 4 events. No cookies or IP addresses."
+msgstr ""
+
+#: includes/class-wakechef-cook-mode-admin.php:342
+msgid "See WakeChef Cook Mode Pro"
 msgstr ""
 
 #: includes/class-wakechef-cook-mode-settings.php:25
